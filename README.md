@@ -4,7 +4,8 @@
 
 ## React: 16.11.0
 
-##Include
+## Include
 * React Navigation
-* Redux
+* React Redux
+* React Native Config
 * API
