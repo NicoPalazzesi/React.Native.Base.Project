@@ -1,6 +1,6 @@
 // @flow
 
-import Config from 'react-native-config';
+//import Config from 'react-native-config';
 
 const WS_TIMEOUT = 30000;
 
@@ -8,10 +8,10 @@ const error = TypeError('Timeout');
 
 export type TPayload = Object;
 
-export const host = process.env.NODE_ENV === 'production' ? 
+export const host = '';/*process.env.NODE_ENV === 'production' ? 
     Config.API_PROD_HOST 
   :
-    Config.API_DEV_HOST;
+    Config.API_DEV_HOST;*/
 
 export const Model = {
   public_web: 'public_web',
