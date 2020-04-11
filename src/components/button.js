@@ -1,3 +1,5 @@
+// @flow
+
 import React, { PureComponent } from 'react';
 
 import {
@@ -8,7 +10,15 @@ import {
 
 import Style from '../stylesheet';
 
-export default class Button extends PureComponent{
+type Props = {
+  text: string,
+  style?: Object,
+  onPress: () => void
+};
+
+type State = void;
+
+export default class Button extends PureComponent<Props,State>{
 
   static defaultProps = {
     title: '',
