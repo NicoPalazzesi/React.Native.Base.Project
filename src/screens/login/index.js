@@ -1,3 +1,5 @@
+// @flow
+
 import React, { PureComponent } from 'react';
 
 import {
@@ -12,7 +14,19 @@ import Navigator from '../../navigator';
 import Button from '../../components/button';
 import Style from '../../stylesheet';
 
-class Index extends PureComponent{
+import { type TLoginDispatchers } from '../../store/actions/login';
+import { type TLoginStore } from '../../store/reducers/login';
+
+type Props = {
+  login: TLoginStore,
+  sendLogin: $PropertyType<TLoginDispatchers, 'sendLogin'>
+};
+
+type State = {
+  showPreloader: bool
+}
+
+class Index extends PureComponent<Props,State>{
 
   constructor(props) {
     super(props);
@@ -103,18 +117,19 @@ const styles = StyleSheet.create({
 	}
 });
 
-import { bindActionCreators } from 'redux';
+import { bindActionCreators, Dispatch } from 'redux';
 import { connect } from 'react-redux';
+import {type TStore} from '../../store';
 
 import sendLogin from '../../store/actions/login';
 
-export const mapDispatchToProps = (dispatch) => bindActionCreators(
+export const mapDispatchToProps = (dispatch: Dispatch<any>) => bindActionCreators(
     sendLogin,
     dispatch
 );
 
 export const mapStateToProps = (
-  login
+  login: TStore
 ) => (login);
 		
 export default connect(mapStateToProps,mapDispatchToProps)(Index);

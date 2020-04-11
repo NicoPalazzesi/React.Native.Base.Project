@@ -1,6 +1,6 @@
 // @flow
 
-//import Config from 'react-native-config';
+import Config from 'react-native-config';
 
 const WS_TIMEOUT = 30000;
 
@@ -8,15 +8,10 @@ const error = TypeError('Timeout');
 
 export type TPayload = Object;
 
-export const host = '';/*process.env.NODE_ENV === 'production' ? 
+export const host = process.env.NODE_ENV === 'production' ? 
     Config.API_PROD_HOST 
   :
-    Config.API_DEV_HOST;*/
-
-export const Model = {
-  public_web: 'public_web',
-  backoffice: 'backoffice'
-};
+    Config.API_DEV_HOST;
 
 export const WSErrors = {
   WS_BAD_REQUEST: 400,
@@ -27,7 +22,7 @@ export const WSErrors = {
 export interface IAPI {
   lastStatusCode: number;
   STATUS_CODES: {[string]: number},
-  buildUrl(ws: string, ...segments: Array<string>): string;
+  buildUrl(...segments: Array<string>): string;
   buildPayload(
     method: 'GET' | 'HEAD' | 'PUT' | 'PATCH' | 'POST' | 'DELETE',
     token: string,
@@ -51,8 +46,8 @@ export default class API implements IAPI {
     BAD_REQUEST: 400,
   };
 
-  buildUrl(ws: 'public_web' | 'backoffice', ...segments: Array<string>) {
-    return `${host}/${ws}/${segments.join('/')}`;
+  buildUrl(...segments: Array<string>) {
+    return `${host}/${segments.join('/')}`;
   }
   
   buildPayload(

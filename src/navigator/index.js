@@ -1,35 +1,38 @@
-let navigation = null;
+
+// @flow
+
+let navigation: any | null = null;
 
 export default {
-  setNavigator(navigator){  
+  setNavigator(navigator: any){  
     navigation = navigator;
   },
 
-  pop(){
+  pop(): void{
     if(navigation !== null){
       navigation.pop();
     }
   },
 
-  push(screen, params){
+  push(screen: string, params?: any): void{
     if(navigation !== null){
       navigation.push(screen,params);
     }
   },
 
-  popToTop(){
+  popToTop(): void{
     if(navigation !== null){  
       navigation.popToTop();
     }
   },
 
-  replace(screen, params){
+  replace(screen: string, params?: any): void{
     if(navigation !== null){
       navigation.replace(screen, params);
     }
   },
 
-  isFocused(){
+  isFocused(): bool{
     if(navigation !== null){
       return navigation.isFocused();
     }

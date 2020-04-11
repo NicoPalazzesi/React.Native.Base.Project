@@ -1,11 +1,23 @@
-export default class Login {
-  api;
+// @flow
 
-  constructor(api){
+import { type IAPI } from './index';
+
+export interface ILogin {
+  +constructor: (IAPI) => any;
+
+  +sendLogin: (data?: any) => Promise<any>;
+
+  +sendLogout: (data?: any) => Promise<any>;
+};
+
+export default class Login implements ILogin {
+  api: IAPI;
+
+  constructor(api: IAPI){
     this.api = api;
   }
 
-  async sendLogin(data){
+  async sendLogin(data?: any){
     /*const url = this.api.buildUrl(Model.public_web,'citizens','login');
     try{
       return await this.api.post(url,undefined,dataFormatToSend);
@@ -16,7 +28,7 @@ export default class Login {
     return {success: true}
   }
 
-  async sendLogout(data){
+  async sendLogout(data?: any){
     /*const url = this.api.buildUrl(Model.public_web,'citizens','logout');
     try{
       return await this.api.post(url,undefined,dataFormatToSend);

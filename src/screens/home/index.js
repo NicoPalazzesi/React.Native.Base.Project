@@ -1,9 +1,12 @@
+// @flow
+
 import React, { PureComponent } from 'react';
 
 import {
   SafeAreaView,
   Text,
   StyleSheet,
+  Alert,
   ActivityIndicator
 } from 'react-native';
 
@@ -11,7 +14,19 @@ import Navigator from '../../navigator';
 import Button from '../../components/button';
 import Style from '../../stylesheet';
 
-class Index extends PureComponent{
+import { type TLoginDispatchers } from '../../store/actions/login';
+import { type TLoginStore } from '../../store/reducers/login';
+
+type Props = {
+  login: TLoginStore,
+  sendLogout: $PropertyType<TLoginDispatchers, 'sendLogout'>
+};
+
+type State = {
+  showPreloader: bool
+}
+
+class Index extends PureComponent<Props,State>{
 
   state = {
     showPreloader: false
@@ -92,18 +107,19 @@ const styles = StyleSheet.create({
 	}
 });
 
-import { bindActionCreators } from 'redux';
+import { bindActionCreators, Dispatch } from 'redux';
 import { connect } from 'react-redux';
+import {type TStore} from '../../store';
 
 import sendLogout from '../../store/actions/login';
 
-export const mapDispatchToProps = (dispatch) => bindActionCreators(
+export const mapDispatchToProps = (dispatch: Dispatch<any>) => bindActionCreators(
     sendLogout,
     dispatch
 );
 
 export const mapStateToProps = (
-  login
+  login: TStore
 ) => (login);
 		
 export default connect(mapStateToProps,mapDispatchToProps)(Index);

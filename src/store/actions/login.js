@@ -1,10 +1,25 @@
+// @flow
+
 import Api from '../../api/';
 import Login from '../../api/login';
+import { Dispatch } from 'redux';
+
+export type TLoginDispatchers = {
+  sendLogin: (data?: any) => void,
+  sendLogout: (data?: any) => void
+}
+
+export type TLoginActions = 
+  | { type: 'LOGIN/START' }
+  | { type: 'LOGIN/LOGIN_SUCCESS' }
+  | { type: 'LOGIN/LOGIN_FAILURE' }
+  | { type: 'LOGIN/LOGOUT_SUCCESS' }
+  | { type: 'LOGIN/LOGOUT_FAILURE' }
 
 export default {
 
-  sendLogin(data){
-    return async function(dispatch) {
+  sendLogin(data?: any){
+    return async function(dispatch: Dispatch<any>) {
       const api = new Api();
       const login = new Login(api);
   
@@ -24,8 +39,8 @@ export default {
     }
   },
 
-  sendLogout(data){
-    return async function(dispatch) {
+  sendLogout(data?: any){
+    return async function(dispatch: Dispatch<any>) {
       const api = new Api();
       const login = new Login(api);
   

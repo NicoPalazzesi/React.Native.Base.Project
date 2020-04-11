@@ -1,3 +1,16 @@
+// @flow
+
+export type TLoginStore = {
+  start: bool,
+  isLogged: bool,
+  sendLoginSuccess: bool,
+  sendLoginFailure: bool,
+  sendLogoutSuccess: bool,
+  sendLogoutFailure: bool
+};
+
+import {type TLoginActions } from '../actions/login';
+
 export const loginInitialState = {
   start: false,
   isLogged: false,
@@ -8,8 +21,8 @@ export const loginInitialState = {
 };
 
 const _loginReducer = (
-  state = loginInitialState,
-  action
+  state: TLoginStore = loginInitialState,
+  action: TLoginActions
 ) => {
   switch(action.type){
     case 'LOGIN/START':
@@ -65,6 +78,6 @@ const loginPersistConfig = {
   ]
 };
 
-export const loginReducer = persistReducer(
+export const loginReducer = persistReducer<TLoginStore, any>(
   loginPersistConfig, _loginReducer
 );
