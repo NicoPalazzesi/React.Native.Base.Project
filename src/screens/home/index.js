@@ -4,7 +4,7 @@ import React, { PureComponent } from 'react';
 
 import {
   SafeAreaView,
-  Text,
+  View,
   StyleSheet,
   Alert,
   ActivityIndicator
@@ -13,6 +13,8 @@ import {
 import Navigator from '../../navigator';
 import Button from '../../components/button';
 import Style from '../../stylesheet';
+import NavBar from '../../components/nav.bar';
+import ScreenTitle from '../../components/screen.title';
 
 import { type TLoginDispatchers } from '../../store/actions/login';
 import { type TLoginStore } from '../../store/reducers/login';
@@ -71,12 +73,19 @@ class Index extends PureComponent<Props,State>{
     } = this.state;
     return(
       <SafeAreaView style={styles.container}>
-        <Text>Home Screen</Text>
-        <Button 
-          text="Logout"
-          onPress={this.onPressLogout}
-          style={styles.button}
+        <NavBar 
+          menu={true}
         />
+        <ScreenTitle 
+          text="HOME"
+        />
+        <View style={styles.content}>
+          <Button 
+            text="Logout"
+            onPress={this.onPressLogout}
+            style={styles.button}
+          />
+        </View>
         { showPreloader && 
           <ActivityIndicator 
             style={styles.loadIndicator} 
@@ -91,10 +100,12 @@ class Index extends PureComponent<Props,State>{
 
 const styles = StyleSheet.create({
   container:{
+    flex: 1
+  },
+  content:{
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
-    padding: 15
+    paddingHorizontal: 18
   },
   button:{
     paddingHorizontal: 25,
