@@ -39,28 +39,38 @@ class Index extends PureComponent<Props,State>{
     if(!this.props.login.start && props.login.start){
       this.setState({showPreloader: true});
     }
-    //Send Login Success
+    //Send Logout Success
     if(!this.props.login.sendLogoutSuccess && props.login.sendLogoutSuccess){
       this.setState({showPreloader: false});
       Navigator.replace('Login');
+      this.onSendLogoutSuccess();
     }
-    //Send Login Failure
+    //Send Logout Failure
     if(!this.props.login.sendLogoutFailure && props.login.sendLogoutFailure){
       this.setState({showPreloader: false});
       this.onSendLogoutFailure();
     }
   }
   
-  onSendLogoutFailure = () => {
+  onSendLogoutSuccess = () => {
     Alert.alert(
-			'Error al cerrar sesión',
-			'No se ha podido cerrar sesión. Por favor, intente nuevamente.',
+			'Successful logout',
+			'Come back soon!',
 			[
-				{	text: 'Cancelar' },
-				{	text: 'Reintentar', onPress: this.onPressLogout }
+				{	text: 'Accept' }
 			]
 		);
+  }
 
+  onSendLogoutFailure = () => {
+    Alert.alert(
+			'Logout failed',
+			'Please, try again later.',
+			[
+				{	text: 'Retry', onPress: this.onPressLogout },
+        {	text: 'Accept' },
+			]
+		);
   }
 
   onPressLogout = () => {

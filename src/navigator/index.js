@@ -4,7 +4,7 @@
 let navigation: any | null = null;
 
 export default {
-  setNavigator(navigator: any){  
+  setNavigator(navigator: any): void{  
     navigation = navigator;
   },
 
