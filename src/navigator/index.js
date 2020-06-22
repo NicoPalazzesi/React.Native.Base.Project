@@ -1,6 +1,8 @@
 
 // @flow
 
+import { DrawerActions } from '@react-navigation/native';
+
 let navigation: any | null = null;
 
 export default {
@@ -21,8 +23,8 @@ export default {
   },
 
   popToTop(): void{
-    if(navigation !== null){  
-      navigation.popToTop();
+    if(navigation !== null){
+      navigation.navigate(screen);
     }
   },
 
@@ -37,5 +39,23 @@ export default {
       return navigation.isFocused();
     }
     return false;
+  },
+
+  openDrawer(): void{
+    if(navigation !== null){
+      navigation.dispatch(DrawerActions.openDrawer());
+    }
+  },
+
+  closeDrawer(): void {
+    if(navigation !== null){
+      navigation.dispatch(DrawerActions.closeDrawer());
+    }
+  },
+
+  toggleDrawer(): void {
+    if(navigation !== null){
+      navigation.dispatch(DrawerActions.toggleDrawer());
+    }
   }
 }

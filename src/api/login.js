@@ -1,5 +1,7 @@
 // @flow
 
+import Config from 'react-native-config';
+
 import { type IAPI } from './index';
 
 import { type TLoginInputData } from '../store/reducers/login';
@@ -28,8 +30,8 @@ export default class Login implements ILogin {
       return e;
     }*/
     return {success: 
-      data.username === "nicolas" &&
-      data.password === "admin123"
+      data.username === Config.USERNAME_DEV &&
+      data.password === Config.PASSWORD_DEV
     }
   }
 
