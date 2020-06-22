@@ -5,6 +5,9 @@ import React, { PureComponent } from 'react';
 import {
   SafeAreaView,
   View,
+  Keyboard,
+  KeyboardAvoidingView,
+  Platform,
   StyleSheet,
   ActivityIndicator,
   Alert
@@ -15,9 +18,12 @@ import Button from '../../components/button';
 import Style from '../../stylesheet';
 import NavBar from '../../components/nav.bar';
 import ScreenTitle from '../../components/screen.title';
+import Form from './form';
+import Validator from '../../helpers/validator.login';
 
 import { type TLoginDispatchers } from '../../store/actions/login';
 import { type TLoginStore } from '../../store/reducers/login';
+import { type TLoginInputData } from '../../store/reducers/login';
 
 type Props = {
   login: TLoginStore,
@@ -25,7 +31,8 @@ type Props = {
 };
 
 type State = {
-  showPreloader: bool
+  showPreloader: bool,
+  loginInputData: TLoginInputData
 }
 
 class Index extends PureComponent<Props,State>{
@@ -38,11 +45,15 @@ class Index extends PureComponent<Props,State>{
     if(props.login.isLogged){
       Navigator.replace('Home');
     }
-  }
+  };
 
   state = {
-    showPreloader: false
-  }
+    showPreloader: false,
+    loginInputData:{
+      username: '',
+      password: ''
+    }
+  };
 
   UNSAFE_componentWillReceiveProps(props){
     //Start
@@ -63,36 +74,81 @@ class Index extends PureComponent<Props,State>{
   
   onSendLoginFailure = () => {
     Alert.alert(
-			'Error al iniciar sesión',
-			'No se ha podido iniciar sesión. Por favor, intente nuevamente.',
+			'Login failed',
+			"Incorrect username or password.",
 			[
-				{	text: 'Cancelar' },
-				{	text: 'Reintentar', onPress: this.onPressLogin }
+				{	text: 'Accept' }
 			]
 		);
 
   }
 
-  onPressLogin = () => {
-    this.props.sendLogin();
+  onChangeUsername = (
+    username: $PropertyType<TLoginInputData, 'username'>
+  ): void => {
+    this.setState({
+      loginInputData:{
+        ...this.state.loginInputData,
+        username
+      }  
+    });
+  };
+
+  onChangePassword = (
+    password: $PropertyType<TLoginInputData, 'password'>
+  ): void => {
+    this.setState({
+      loginInputData:{
+        ...this.state.loginInputData,
+        password
+      }  
+    });
+  };
+
+  onSubmit = () => {
+    this.hideKeyboard();
+    
+    if(Validator.checkLoginInputData(this.state.loginInputData)){
+      this.props.sendLogin(this.state.loginInputData);
+    }
+  }
+
+  hideKeyboard = () => {
+    Keyboard.dismiss();
   }
 
   render(){
     const {
       showPreloader
     } = this.state;
+    const {
+      username,
+      password
+    } = this.state.loginInputData;
     return(
       <SafeAreaView style={styles.container}>
         <NavBar />
         <ScreenTitle
           text="LOGIN"
         />
-        <View style={styles.content}>
-          <Button 
-            text="Login"
-            onPress={this.onPressLogin}
-            style={styles.button}
-          />
+        <View style={styles.formContainer}>
+          <KeyboardAvoidingView 
+            behavior="padding"
+            keyboardVerticalOffset={10}
+          >
+            <Form
+              username={username}
+              password={password}
+              onChangeUsername={this.onChangeUsername}
+              onChangePassword={this.onChangePassword}
+              onSubmitPassword={this.onSubmit}
+            />
+            <Button 
+              text="Login"
+              onPress={this.onSubmit}
+              style={styles.button}
+            />
+          </KeyboardAvoidingView>
         </View>
         { showPreloader && 
           <ActivityIndicator 
@@ -110,7 +166,7 @@ const styles = StyleSheet.create({
   container:{
     flex: 1
   },
-  content:{
+  formContainer:{
     flex: 1,
     justifyContent: 'center',
     paddingHorizontal: 18

@@ -2,12 +2,14 @@
 
 import { type IAPI } from './index';
 
+import { type TLoginInputData } from '../store/reducers/login';
+
 export interface ILogin {
   +constructor: (IAPI) => any;
 
-  +sendLogin: (data?: any) => Promise<any>;
+  +sendLogin: (data: TLoginInputData) => Promise<any>;
 
-  +sendLogout: (data?: any) => Promise<any>;
+  +sendLogout: () => Promise<any>;
 };
 
 export default class Login implements ILogin {
@@ -17,21 +19,24 @@ export default class Login implements ILogin {
     this.api = api;
   }
 
-  async sendLogin(data?: any){
-    /*const url = this.api.buildUrl(Model.public_web,'citizens','login');
+  async sendLogin(data: TLoginInputData){
+    /*const url = this.api.buildUrl('users', 'login');
     try{
-      return await this.api.post(url,undefined,dataFormatToSend);
+      return await this.api.post(url, data);
     }catch(e){
       console.error('fail Login.sendLogin',e.status);
       return e;
     }*/
-    return {success: true}
+    return {success: 
+      data.username === "nicolas" &&
+      data.password === "admin123"
+    }
   }
 
-  async sendLogout(data?: any){
-    /*const url = this.api.buildUrl(Model.public_web,'citizens','logout');
+  async sendLogout(){
+    /*const url = this.api.buildUrl('users', 'logout');
     try{
-      return await this.api.post(url,undefined,dataFormatToSend);
+      return await this.api.post(url);
     }catch(e){
       console.error('fail Login.sendLogout',e.status);
       return e;

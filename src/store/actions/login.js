@@ -4,9 +4,11 @@ import Api from '../../api/';
 import Login from '../../api/login';
 import { Dispatch } from 'redux';
 
+import { type TLoginInputData } from '../reducers/login';
+
 export type TLoginDispatchers = {
-  sendLogin: (data?: any) => void,
-  sendLogout: (data?: any) => void
+  sendLogin: (data: TLoginInputData) => void,
+  sendLogout: () => void
 }
 
 export type TLoginActions = 
@@ -18,7 +20,7 @@ export type TLoginActions =
 
 export default {
 
-  sendLogin(data?: any){
+  sendLogin(data: TLoginInputData){
     return async function(dispatch: Dispatch<any>) {
       const api = new Api();
       const login = new Login(api);
@@ -39,7 +41,7 @@ export default {
     }
   },
 
-  sendLogout(data?: any){
+  sendLogout(){
     return async function(dispatch: Dispatch<any>) {
       const api = new Api();
       const login = new Login(api);
@@ -47,7 +49,7 @@ export default {
       dispatch({
         type: 'LOGIN/START',
       });
-      const response = await login.sendLogout(data);
+      const response = await login.sendLogout();
       if(response.success){
         dispatch({
           type: 'LOGIN/LOGOUT_SUCCESS'

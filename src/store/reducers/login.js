@@ -1,5 +1,10 @@
 // @flow
 
+export type TLoginInputData = {
+  username: string,
+  password: string
+}
+
 export type TLoginStore = {
   start: bool,
   isLogged: bool,
