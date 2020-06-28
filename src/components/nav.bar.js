@@ -6,17 +6,17 @@ import {
   View,
   Text,
   TouchableOpacity,
-  Platform,
+  Keyboard,
   StyleSheet
 } from 'react-native';
 
 import IconMCI from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import Style from '../stylesheet';
+import Navigator from '../navigator';
 
 type Props = {
-  menu?: bool,
-  back?: bool
+  menu?: bool
 };
 
 type State = void;
@@ -24,40 +24,24 @@ type State = void;
 export default class NavBar extends PureComponent<Props,State>{
 
   static defaultProps = {
-    menu: false,
-    back: false
+    menu: false
   };
 
-  onPressBackButton = () => {
-
+  onPressMenuButton = () => {
+    this.hideKeyboard();
+    Navigator.openDrawer();
   }
 
-  onPressMenuButton = () => {
-    
+  hideKeyboard = () => {
+    Keyboard.dismiss();
   }
 
   render(){
     const {
-      menu,
-      back
+      menu
     } = this.props;
     return(
       <View style={styles.container}>
-        <View style={styles.buttonContainer}>
-          { back &&
-            <TouchableOpacity 
-              style={styles.button}
-              onPress={this.onPressBackButton}
-            >
-              <IconMCI 
-                name={ Platform.OS === "ios" ? "chevron-left" : "arrow-left" }
-                color={Style.blackColor} 
-                size={Style.fontSizeHuge}
-              />
-            </TouchableOpacity>
-          }
-        </View>
-        <Text style={styles.text}>R. N. Base Project</Text>
         <View style={styles.buttonContainer}>
           { menu &&
             <TouchableOpacity 
@@ -72,6 +56,8 @@ export default class NavBar extends PureComponent<Props,State>{
             </TouchableOpacity>
           }
         </View>
+        <Text style={styles.text}>R. N. Base Project</Text>
+        <View style={styles.buttonContainer} />
       </View>
     );
   }

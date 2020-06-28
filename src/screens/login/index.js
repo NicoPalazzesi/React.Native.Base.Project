@@ -13,6 +13,8 @@ import {
   Alert
 } from 'react-native';
 
+import Config from 'react-native-config';
+
 import Navigator from '../../navigator';
 import Button from '../../components/button';
 import Style from '../../stylesheet';
@@ -50,8 +52,8 @@ class Index extends PureComponent<Props,State>{
   state = {
     showPreloader: false,
     loginInputData:{
-      username: '',
-      password: ''
+      username: process.env.NODE_ENV === 'production' ? '' : Config.USERNAME_DEV,
+      password: process.env.NODE_ENV === 'production' ? '' : Config.PASSWORD_DEV
     }
   };
 
@@ -127,7 +129,9 @@ class Index extends PureComponent<Props,State>{
     } = this.state.loginInputData;
     return(
       <SafeAreaView style={styles.container}>
-        <NavBar />
+        <NavBar 
+          menu={true}
+        />
         <ScreenTitle
           text="LOGIN"
         />
