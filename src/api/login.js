@@ -29,9 +29,12 @@ export default class Login implements ILogin {
       console.error('fail Login.sendLogin',e.status);
       return e;
     }*/
-    return {success: 
-      data.username === Config.USERNAME_DEV &&
+    await this.wait(2000);
+    const success = data.username === Config.USERNAME_DEV &&
       data.password === Config.PASSWORD_DEV
+    return {
+      success,
+      json: success ? require('./jwt.json') : undefined
     }
   }
 
@@ -43,6 +46,13 @@ export default class Login implements ILogin {
       console.error('fail Login.sendLogout',e.status);
       return e;
     }*/
+    await this.wait(2000);
     return {success: true}
+  }
+
+  async wait(ms: number) {
+    return new Promise(resolve => {
+      setTimeout(resolve, ms);
+    });
   }
 }
