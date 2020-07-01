@@ -10,11 +10,15 @@ import {
   ActivityIndicator
 } from 'react-native';
 
-import Navigator from '../../navigator';
 import Button from '../../components/button';
 import Style from '../../stylesheet';
 import NavBar from '../../components/nav.bar';
 import ScreenTitle from '../../components/screen.title';
+import {
+  confirmLogout,
+  onLogoutSuccess,
+  onLogoutFailure
+} from '../../helpers/logout';
 
 import { type TLoginDispatchers } from '../../store/actions/login';
 import { type TLoginStore } from '../../store/reducers/login';
@@ -42,39 +46,17 @@ class Index extends PureComponent<Props,State>{
     //Send Logout Success
     if(!this.props.login.sendLogoutSuccess && props.login.sendLogoutSuccess){
       this.setState({showPreloader: false});
-      Navigator.replace('Login');
-      this.onSendLogoutSuccess();
+      onLogoutSuccess();
     }
     //Send Logout Failure
     if(!this.props.login.sendLogoutFailure && props.login.sendLogoutFailure){
       this.setState({showPreloader: false});
-      this.onSendLogoutFailure();
+      onLogoutFailure();
     }
   }
-  
-  onSendLogoutSuccess = () => {
-    Alert.alert(
-			'Successful logout',
-			'Come back soon!',
-			[
-				{	text: 'Accept' }
-			]
-		);
-  }
 
-  onSendLogoutFailure = () => {
-    Alert.alert(
-			'Logout failed',
-			'Please, try again later.',
-			[
-				{	text: 'Retry', onPress: this.onPressLogout },
-        {	text: 'Accept' },
-			]
-		);
-  }
-
-  onPressLogout = () => {
-    this.props.sendLogout();
+  onPressLogout = (): void => {
+    confirmLogout(this.props.sendLogout);
   }
 
   render(){

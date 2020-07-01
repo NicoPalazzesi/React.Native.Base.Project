@@ -3,12 +3,15 @@
 import { combineReducers } from 'redux';
 
 import {loginReducer, loginInitialState} from './login';
+import {userReducer, userInitialState} from './user';
 
 export default combineReducers(
   { 
-    login: loginReducer
+    login: loginReducer,
+    user: userReducer
   }, 
   { 
-    loginReducer: loginInitialState
+    loginReducer: loginInitialState,
+    userReducer: userInitialState
   }
 )

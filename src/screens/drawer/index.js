@@ -12,50 +12,59 @@ import {
 import Button from './button';
 import Style from '../../stylesheet';
 import Navigator from '../../navigator';
+import { confirmLogout } from '../../helpers/logout';
 
 import { type TLoginDispatchers } from '../../store/actions/login';
+import { type TUserDispatchers } from '../../store/actions/user';
 import { type TLoginStore } from '../../store/reducers/login';
+import { type TUserStore } from '../../store/reducers/user';
 
 type State = void;
 
 type Props = {
   login: TLoginStore,
-  sendLogout: $PropertyType<TLoginDispatchers, 'sendLogout'>
+  user: TUserStore,
+  sendLogout: $PropertyType<TLoginDispatchers, 'sendLogout'>,
+  getUserData: $PropertyType<TUserDispatchers, 'getUserData'>
 };
 
 class Index extends PureComponent<Props,State>{
 
-  onPressMyProfile = (): void => {
+  constructor(props) {
+    super(props);
 
+    if(this.props.login.isLogged){
+      this.props.getUserData(this.props.user.jwt);
+    }
+  };
+
+  onPressMyProfile = (): void => {
+    Navigator.push("Profile");
+    Navigator.closeDrawer();
   }
 
   onPressAbout = (): void => {
 
   }
 
-  onPressLogOut = (): void => {
-    Alert.alert(
-      'Confirm log out',
-      'Do you want to log out?',
-      [ {text: 'Cancel'},
-        {text: 'Confirm', onPress: this.onConfirmLogOut}]
-    );
-  }
-
-  onConfirmLogOut = (): void => {
-    this.props.sendLogout();
-    Navigator.closeDrawer();
+  onPressLogout = (): void => {
+    confirmLogout(this.props.sendLogout);
   }
 
   render(){
     const {
       isLogged
     } = this.props.login;
+    const {
+      firstName
+    } = this.props.user.userData;
     return(
       <SafeAreaView style={styles.container}>
         {isLogged &&
           <View style={styles.headerContainer}>
-            <Text style={styles.headerText}>Hi Nicolas</Text>
+            <Text style={styles.headerText}>
+              Hi {firstName ? firstName : ''}
+            </Text>
           </View>
         }
         <View style={styles.bodyContainer}>
@@ -76,7 +85,7 @@ class Index extends PureComponent<Props,State>{
         <View style={styles.line} />
         {isLogged &&
           <View style={styles.footerContainer}>
-            <Button icon="sign-out" text="Log out" onPress={this.onPressLogOut}/>
+            <Button icon="sign-out" text="Log out" onPress={this.onPressLogout}/>
           </View>
         }
       </SafeAreaView>
@@ -118,14 +127,17 @@ import { connect } from 'react-redux';
 import {type TStore} from '../../store';
 
 import sendLogout from '../../store/actions/login';
+import getDataUser from '../../store/actions/user';
 
 export const mapDispatchToProps = (dispatch: Dispatch<any>) => bindActionCreators(
+    Object.assign({},
     sendLogout,
+    getDataUser),
     dispatch
 );
 
 export const mapStateToProps = (
-  login: TStore
-) => (login);
+  {login, user}: TStore
+) => ({login, user});
 		
 export default connect(mapStateToProps, mapDispatchToProps)(Index);

@@ -33,6 +33,10 @@ export default {
         dispatch({
           type: 'LOGIN/LOGIN_SUCCESS'
           });
+        dispatch({
+          type: 'USER/SET_JWT',
+          payload: response.json
+          });
         }else{
           dispatch({
             type: 'LOGIN/LOGIN_FAILURE'

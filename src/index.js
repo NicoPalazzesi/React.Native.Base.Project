@@ -10,12 +10,14 @@ import {store, persistor} from './store';
 import Login from './screens/login';
 import Home from './screens/home';
 import DrawerMenu from './screens/drawer';
+import Profile from './screens/profile';
 
 const ScreensStack = createStackNavigator();
 const ScreenStackNavigator = () => (
   <ScreensStack.Navigator headerMode="none">
     <ScreensStack.Screen name="Login" component={Login} />
     <ScreensStack.Screen name="Home" component={Home} />
+    <ScreensStack.Screen name="Profile" component={Profile} />
   </ScreensStack.Navigator>
 );
 
