@@ -44,7 +44,8 @@ class Index extends PureComponent<Props,State>{
   }
 
   onPressAbout = (): void => {
-
+    Navigator.push("About");
+    Navigator.closeDrawer();
   }
 
   onPressLogout = (): void => {
