@@ -7,14 +7,14 @@ import {
   View,
   Text,
   StyleSheet,
-  Alert,
-  ActivityIndicator
+  Alert
 } from 'react-native';
 
 import NavBar from '../../components/nav.bar';
 import Style from '../../stylesheet';
 import Navigator from '../../navigator';
 import ScreenTitle from '../../components/screen.title';
+import Preloader from '../../components/preloader';
 import Header from './header';
 import Date from '../../helpers/date';
 
@@ -95,13 +95,7 @@ class Index extends PureComponent<Props,State>{
             <Text>{Date.getBirthdateFormat(birthdate)}</Text>
           </View>
         </>}
-        { showPreloader && 
-          <ActivityIndicator 
-            style={styles.loadIndicator} 
-            color={Style.blueColor}
-            size="large"
-          />
-        }
+        {showPreloader && <Preloader />}
       </SafeAreaView>
     );
   }
@@ -119,10 +113,6 @@ const styles = StyleSheet.create({
   birthdateTitle: {
     fontWeight: 'bold',
     marginRight: 5
-  },
-  loadIndicator: {
-    ...StyleSheet.absoluteFillObject,
-		backgroundColor: 'rgba(0,0,0,0.5)'
   }
 });
 
