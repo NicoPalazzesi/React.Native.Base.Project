@@ -6,14 +6,14 @@ import {
   SafeAreaView,
   View,
   StyleSheet,
-  Alert,
-  ActivityIndicator
+  Alert
 } from 'react-native';
 
 import Button from '../../components/button';
 import Style from '../../stylesheet';
 import NavBar from '../../components/nav.bar';
 import ScreenTitle from '../../components/screen.title';
+import Preloader from '../../components/preloader';
 import {
   confirmLogout,
   onLogoutSuccess,
@@ -78,13 +78,7 @@ class Index extends PureComponent<Props,State>{
             style={styles.button}
           />
         </View>
-        { showPreloader && 
-          <ActivityIndicator 
-            style={styles.loadIndicator} 
-            color={Style.blueColor}
-            size="large"
-          />
-        }
+        {showPreloader && <Preloader />}
       </SafeAreaView>
     );
   }
@@ -103,11 +97,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 25,
     paddingVertical: 5,
     marginVertical: 10
-  },
-  loadIndicator:{
-		...StyleSheet.absoluteFillObject,
-		backgroundColor: 'rgba(0,0,0,0.5)',
-	}
+  }
 });
 
 import { bindActionCreators, Dispatch } from 'redux';
