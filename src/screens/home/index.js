@@ -5,15 +5,17 @@ import React, { PureComponent } from 'react';
 import {
   SafeAreaView,
   View,
+  Text,
   StyleSheet,
   Alert
 } from 'react-native';
 
-import Button from '../../components/button';
 import Style from '../../stylesheet';
 import NavBar from '../../components/nav.bar';
 import ScreenTitle from '../../components/screen.title';
 import Preloader from '../../components/preloader';
+import ReactNativeImage from './react.native.image';
+import InstalledLibraries from './installed.libraries';
 import {
   confirmLogout,
   onLogoutSuccess,
@@ -39,18 +41,20 @@ class Index extends PureComponent<Props,State>{
   }
 
   UNSAFE_componentWillReceiveProps(props){
-    //Start
+    // start logout
     if(!this.props.login.start && props.login.start){
       this.setState({showPreloader: true});
     }
-    //Send Logout Success
-    if(!this.props.login.sendLogoutSuccess && props.login.sendLogoutSuccess){
+    // finish logout
+    if(this.props.login.start && !props.login.start){
       this.setState({showPreloader: false});
+    }
+    // logout success
+    if(!this.props.login.sendLogoutSuccess && props.login.sendLogoutSuccess){
       onLogoutSuccess();
     }
-    //Send Logout Failure
+    // logout failure
     if(!this.props.login.sendLogoutFailure && props.login.sendLogoutFailure){
-      this.setState({showPreloader: false});
       onLogoutFailure();
     }
   }
@@ -69,14 +73,15 @@ class Index extends PureComponent<Props,State>{
           menu={true}
         />
         <ScreenTitle 
-          text="HOME"
+          text="Welcome"
         />
         <View style={styles.content}>
-          <Button 
-            text="Logout"
-            onPress={this.onPressLogout}
-            style={styles.button}
-          />
+          <View style={styles.rnbpContainer}>
+            <ReactNativeImage />
+            <Text>Thanks for use</Text>
+            <Text style={styles.rnbpText}>{'React Native\nBase Proyect'}</Text>
+          </View>
+          <InstalledLibraries />
         </View>
         {showPreloader && <Preloader />}
       </SafeAreaView>
@@ -90,13 +95,17 @@ const styles = StyleSheet.create({
   },
   content:{
     flex: 1,
-    justifyContent: 'center',
     paddingHorizontal: 18
   },
-  button:{
-    paddingHorizontal: 25,
-    paddingVertical: 5,
-    marginVertical: 10
+  rnbpContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  rnbpText: {
+    color: Style.blueLightColor,
+    fontSize: Style.fontSizeHuge,
+    fontWeight: 'bold'
   }
 });
 
