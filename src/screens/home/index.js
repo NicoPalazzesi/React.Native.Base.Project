@@ -68,9 +68,7 @@ class Index extends PureComponent<Props,State>{
     } = this.state;
     return(
       <SafeAreaView style={styles.container}>
-        <NavBar 
-          menu={true}
-        />
+        <NavBar menu={true} title="Welcome" />
         <View style={styles.content}>
           <View style={styles.rnbpContainer}>
             <ReactNativeImage />

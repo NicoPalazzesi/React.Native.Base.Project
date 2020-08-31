@@ -16,7 +16,8 @@ import Style from '../stylesheet';
 import Navigator from '../navigator';
 
 type Props = {
-  menu?: bool
+  menu?: bool,
+  title: string
 };
 
 type State = void;
@@ -24,7 +25,8 @@ type State = void;
 export default class NavBar extends PureComponent<Props,State>{
 
   static defaultProps = {
-    menu: false
+    menu: false,
+    title: ''
   };
 
   onPressMenuButton = () => {
@@ -38,7 +40,8 @@ export default class NavBar extends PureComponent<Props,State>{
 
   render(){
     const {
-      menu
+      menu,
+      title
     } = this.props;
     return(
       <View style={styles.container}>
@@ -50,13 +53,13 @@ export default class NavBar extends PureComponent<Props,State>{
             >
               <IconMCI 
                 name="menu"
-                color={Style.blackColor}
+                color={Style.whiteColor}
                 size={30}
               />
             </TouchableOpacity>
           }
         </View>
-        <Text style={styles.text}>R. N. Base Project</Text>
+        <Text style={styles.text}>{title}</Text>
         <View style={styles.buttonContainer} />
       </View>
     );
@@ -68,6 +71,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    backgroundColor: Style.grayDarkColor,
     width: '100%',
     height: 55
   },
@@ -76,7 +80,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontWeight: 'bold',
     fontSize: Style.fontSizeBig,
-    color: Style.blueColor
+    color: Style.whiteColor
   },
   buttonContainer:{
     width: '18%'

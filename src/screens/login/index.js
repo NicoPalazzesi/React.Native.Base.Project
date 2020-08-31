@@ -128,26 +128,21 @@ class Index extends PureComponent<Props,State>{
     } = this.state.loginInputData;
     return(
       <SafeAreaView style={styles.container}>
-        <NavBar 
-          menu={true}
-        />
+        <NavBar menu={true} title="Login" />
         <View style={styles.formContainer}>
           <KeyboardAvoidingView 
             behavior="padding"
-            keyboardVerticalOffset={10}
-          >
+            keyboardVerticalOffset={10}>
             <Form
               username={username}
               password={password}
               onChangeUsername={this.onChangeUsername}
               onChangePassword={this.onChangePassword}
-              onSubmitPassword={this.onSubmit}
-            />
+              onSubmitPassword={this.onSubmit} />
             <Button 
               text="Login"
               onPress={this.onSubmit}
-              style={styles.button}
-            />
+              style={styles.button} />
           </KeyboardAvoidingView>
         </View>
         {showPreloader && <Preloader />}
