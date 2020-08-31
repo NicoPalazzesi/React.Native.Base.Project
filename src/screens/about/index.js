@@ -56,7 +56,7 @@ export default class Index extends PureComponent<Props,State>{
   render(){
     return(
       <SafeAreaView style={styles.container}>
-        <NavBar menu={true} />
+        <NavBar menu={true} title="About" />
         <View style={styles.contentContainer}>
           <Text style={styles.nameProjectText}>React Native Base Project</Text>
           <Version />

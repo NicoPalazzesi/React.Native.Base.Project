@@ -85,7 +85,7 @@ class Index extends PureComponent<Props,State>{
     } = this.props.user.userData;
     return(
       <SafeAreaView style={styles.container}>
-        <NavBar menu={true} />
+        <NavBar menu={true} title="My Profile" />
         {this.props.user.userData && !showPreloader && <>
           <Header firstName={firstName} lastName={lastName} email={email}/>
           <View style={styles.birthdateContainer}>

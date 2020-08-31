@@ -1,10 +1,10 @@
 // @flow
 
 const blueColor = '#002366';
-const blueLightColor = '#00A6FB';
-const grayColor = '#A4A4A4';
+const blueLightColor = '#61DBFB';
+const grayColor = '#282C34';
 const grayLightColor = '#D8D8D8';
-const grayDarkColor = '#a0a0a0';
+const grayDarkColor = '#20232A';
 const whiteColor = '#fff';
 const blackColor = '#000';
 const blackLightColor = '#777';
