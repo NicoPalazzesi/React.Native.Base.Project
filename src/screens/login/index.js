@@ -18,7 +18,6 @@ import Navigator from '../../navigator';
 import Button from '../../components/button';
 import Style from '../../stylesheet';
 import NavBar from '../../components/nav.bar';
-import ScreenTitle from '../../components/screen.title';
 import Preloader from '../../components/preloader';
 import Form from './form';
 import Validator from '../../helpers/validator.login';
@@ -131,9 +130,6 @@ class Index extends PureComponent<Props,State>{
       <SafeAreaView style={styles.container}>
         <NavBar 
           menu={true}
-        />
-        <ScreenTitle
-          text="LOGIN"
         />
         <View style={styles.formContainer}>
           <KeyboardAvoidingView 

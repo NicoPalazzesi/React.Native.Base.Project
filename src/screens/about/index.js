@@ -14,7 +14,6 @@ import {
 import Config from 'react-native-config';
 
 import NavBar from '../../components/nav.bar';
-import ScreenTitle from '../../components/screen.title';
 import Style from '../../stylesheet';
 import GitHub from './github';
 
@@ -58,7 +57,6 @@ export default class Index extends PureComponent<Props,State>{
     return(
       <SafeAreaView style={styles.container}>
         <NavBar menu={true} />
-        <ScreenTitle text="ABOUT" />
         <View style={styles.contentContainer}>
           <Text style={styles.nameProjectText}>React Native Base Project</Text>
           <Version />
