@@ -13,7 +13,6 @@ import {
 import NavBar from '../../components/nav.bar';
 import Style from '../../stylesheet';
 import Navigator from '../../navigator';
-import ScreenTitle from '../../components/screen.title';
 import Preloader from '../../components/preloader';
 import Header from './header';
 import Date from '../../helpers/date';
@@ -87,7 +86,6 @@ class Index extends PureComponent<Props,State>{
     return(
       <SafeAreaView style={styles.container}>
         <NavBar menu={true} />
-        <ScreenTitle text="MY PROFILE" />
         {this.props.user.userData && !showPreloader && <>
           <Header firstName={firstName} lastName={lastName} email={email}/>
           <View style={styles.birthdateContainer}>
