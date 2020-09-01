@@ -1,12 +1,7 @@
 // @flow
 
 import React, { PureComponent } from 'react';
-
-import {
-  TouchableOpacity,
-  Text,
-  StyleSheet
-} from 'react-native';
+import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 
 import Style from '../stylesheet';
 
@@ -35,6 +30,7 @@ export default class Button extends PureComponent<Props,State>{
       <TouchableOpacity 
         style={[styles.container, style]}
         onPress={onPress}
+        activeOpacity={0.4}
       >
         <Text style={styles.text}>{text}</Text>
       </TouchableOpacity>
@@ -44,7 +40,7 @@ export default class Button extends PureComponent<Props,State>{
 
 const styles = StyleSheet.create({
   container:{
-    borderRadius: 15,
+    paddingVertical: 10,
     backgroundColor: Style.blueLightColor,
     justifyContent: 'center',
     alignItems: 'center'
