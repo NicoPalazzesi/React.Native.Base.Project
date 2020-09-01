@@ -163,9 +163,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 18
   },
   button:{
-    paddingHorizontal: 25,
-    paddingVertical: 5,
-    marginVertical: 10
+    marginTop: 13
   }
 });
 
