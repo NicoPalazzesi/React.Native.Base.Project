@@ -12,6 +12,7 @@ import {
 
 import Style from '../../stylesheet';
 import NavBar from '../../components/nav.bar';
+import StatusBar from '../../components/status.bar';
 import Preloader from '../../components/preloader';
 import ReactNativeImage from './react.native.image';
 import InstalledLibraries from './installed.libraries';
@@ -68,6 +69,7 @@ class Index extends PureComponent<Props,State>{
     } = this.state;
     return(
       <SafeAreaView style={styles.container}>
+        <StatusBar />
         <NavBar menu={true} title="Welcome" />
         <View style={styles.content}>
           <View style={styles.rnbpContainer}>
