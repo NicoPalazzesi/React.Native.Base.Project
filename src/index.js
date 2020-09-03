@@ -12,6 +12,7 @@ import Home from './screens/home';
 import DrawerMenu from './screens/drawer';
 import Profile from './screens/profile';
 import About from './screens/about';
+import ContactMe from './screens/contact.me';
 
 const ScreensStack = createStackNavigator();
 const ScreenStackNavigator = () => (
@@ -20,6 +21,7 @@ const ScreenStackNavigator = () => (
     <ScreensStack.Screen name="Home" component={Home} />
     <ScreensStack.Screen name="Profile" component={Profile} />
     <ScreensStack.Screen name="About" component={About} />
+    <ScreensStack.Screen name="ContactMe" component={ContactMe} />
   </ScreensStack.Navigator>
 );
 
