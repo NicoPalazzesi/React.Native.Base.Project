@@ -13,7 +13,8 @@ const orangeColor = '#ed7e2c';
 const yellowColor = '#ffcc00';
 const greenColor = '#3cc7a4';
 const greenDarkColor = '#1b9677';
-const crimsonColor = '#DC143C';
+const linkedinColor = '#006097';
+const mailColor = '#d93025';
 const preloaderOpacity = 'rgba(0,0,0,0.5)';
 const fontSizeTiny = 9;
 const fontSizeSmall = 11;
@@ -35,7 +36,8 @@ export default {
   yellowColor,
   greenColor,
   greenDarkColor,
-  crimsonColor,
+  linkedinColor,
+  mailColor,
   preloaderOpacity,
   fontSizeTiny,
   fontSizeSmall,

@@ -48,6 +48,11 @@ class Index extends PureComponent<Props,State>{
     Navigator.closeDrawer();
   }
 
+  onPressContactMe = (): void => {
+    Navigator.push("ContactMe");
+    Navigator.closeDrawer();
+  }
+
   onPressLogout = (): void => {
     confirmLogout(this.props.sendLogout);
   }
@@ -78,6 +83,11 @@ class Index extends PureComponent<Props,State>{
           }
         </View>
         <View style={styles.line} />
+        <Button
+          icon="phone"
+          text="Contact me"
+          onPress={this.onPressContactMe}
+        />
         <Button
           icon="question-circle-o"
           text="About"
