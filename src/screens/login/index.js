@@ -21,6 +21,7 @@ import NavBar from '../../components/nav.bar';
 import StatusBar from '../../components/status.bar';
 import Preloader from '../../components/preloader';
 import Form from './form';
+import Author from '../../components/author';
 import Validator from '../../helpers/validator.login';
 
 import { type TLoginDispatchers } from '../../store/actions/login';
@@ -146,6 +147,7 @@ class Index extends PureComponent<Props,State>{
               onPress={this.onSubmit}
               style={styles.button} />
           </KeyboardAvoidingView>
+          <Author />
         </View>
         {showPreloader && <Preloader />}
       </SafeAreaView>

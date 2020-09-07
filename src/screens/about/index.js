@@ -16,6 +16,7 @@ import Config from 'react-native-config';
 import NavBar from '../../components/nav.bar';
 import Style from '../../stylesheet';
 import GitHub from './github';
+import Author from '../../components/author';
 
 type Props = {};
 
@@ -62,7 +63,7 @@ export default class Index extends PureComponent<Props,State>{
           <Version />
           <TestUser />
           <GitHub />
-          <Text>Developed by Nicolás Palazzesi</Text>
+          <Author />
         </View>
       </SafeAreaView>
     );
@@ -74,10 +75,12 @@ const styles = StyleSheet.create({
     flex: 1
   },
   contentContainer: {
-    padding: 18,
+    flex: 1,
+    paddingHorizontal: 18,
     alignItems: 'center'
   },
   nameProjectText: {
+    marginTop: 18,
     color: Style.blueColor,
     fontSize: Style.fontSizeHuge,
     fontWeight: 'bold'
